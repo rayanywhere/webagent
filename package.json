@@ -1,6 +1,6 @@
 {
-  "name": "node-crawler",
-  "version": "1.0.0",
+  "name": "webagent",
+  "version": "1.0.1",
   "description": "",
   "main": "index.js",
   "directories": {
@@ -11,7 +11,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/rayanywhere/node-crawler.git"
+    "url": "git+https://github.com/rayanywhere/webagent.git"
   },
   "keywords": [
     "crawler"
@@ -19,9 +19,9 @@
   "author": "rayanywhere",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/rayanywhere/node-crawler/issues"
+    "url": "https://github.com/rayanywhere/webagent/issues"
   },
-  "homepage": "https://github.com/rayanywhere/node-crawler#readme",
+  "homepage": "https://github.com/rayanywhere/webagent#readme",
   "dependencies": {
     "query-string": "^4.3.4",
     "request": "^2.81.0"

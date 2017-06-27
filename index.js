@@ -60,6 +60,7 @@ module.exports = class Crawler {
 		this._lastRequest = req;
 
 		let opts = req.toOptions();
+		opts.gzip = true;
 		opts.jar = this._context.jar;
 		if (this._context.url !== null) {
 			opts.headers.Referer = this._context.url;
