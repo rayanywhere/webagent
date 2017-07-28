@@ -46,8 +46,4 @@ module.exports = class Request {
 			headers: this._header
 		};
 	}
-
-	toString() {
-		throw new Error('this method is supposed to be implemented by subclasses');
-	}
 }

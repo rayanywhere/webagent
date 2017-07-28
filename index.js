@@ -8,18 +8,20 @@ module.exports = class Crawler {
 	static get Response() { return Response; }
 
 	/*
-	 * options = {proxy, context:{cookies, url}, debug}
+	 * options = {proxy, headers, context:{cookies, url}, debug}
 	 */
 	constructor(options = {}) {
 		//step 1. validate options
 		assert(options.proxy === undefined || typeof options.proxy === 'string', 'options.proxy should be a string or undefined');
 		assert(options.context === undefined || typeof options.context === 'object' && typeof options.context.cookies === 'object' && typeof options.context.url === 'string', 'options.context should a object that contains both cookies and url or undefined');
 		assert(options.debug === undefined || typeof options.debug === 'boolean', 'options.debug should be a boolean or undefined');
+		assert(options.headers === undefined || typeof options.headers === 'object', 'options.header should be an object or undefined');
 
 		//step 2. create core(request object)
 		this._core = Core.defaults(options.proxy ? {proxy: options.proxy, tunnel: false} : {});
 
 		//step 3. setup context according to options
+		this._headers = options.headers;
 		this._context = {
 			url: options.context ? options.context.url : null,
 			jar: Core.jar()
@@ -62,6 +64,9 @@ module.exports = class Crawler {
 		let opts = req.toOptions();
 		opts.gzip = true;
 		opts.jar = this._context.jar;
+		if (this._headers !== undefined) {
+			opts.headers = Object.assign(opts.headers, this._headers);
+		}
 		if (this._context.url !== null) {
 			opts.headers.Referer = this._context.url;
 		}
@@ -88,6 +93,9 @@ module.exports = class Crawler {
 		let opts = req.toOptions();
 		opts.jar = this._context.jar;
 		opts.headers['X-Requested-With'] = 'XMLHttpRequest';
+		if (this._headers !== undefined) {
+			opts.headers = Object.assign(opts.headers, this._headers);
+		}
 		if (this._context.url !== null) {
 			opts.headers.Referer = this._context.url;
 		}

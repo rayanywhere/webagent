@@ -8,8 +8,4 @@ module.exports = class Response {
 	get body() { return this._body; }
 	get textBody() { return this._body.toString('utf8'); }
 	get jsonBody() { return JSON.parse(this._body); }
-
-	toString() {
-		return `status: ${this._status}\nbody: ${this.textBody}`;
-	}
 }
