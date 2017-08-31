@@ -38,6 +38,21 @@ module.exports = class RequestPost extends Request {
 		return this;
 	}
 
+	setMultipartBody(body) {
+		if (!ajv.validate({
+			type: "object",
+			patternProperties:  {
+				"^.+$": { type: ["integer", "number", "boolean", "string", "array", "object", "null"] }
+			}
+		}, body)) {
+			throw new Error('bad body, reason:' + ajv.errorsText());
+		}
+		this._bodyType = 'multipartForm';
+		this._bodyData = body;
+		this._contentType = 'multipart/form-data';
+		return this;
+	}
+
 	setJsonBody(body) {
 		if (!ajv.validate({
 			type: "object",
@@ -58,6 +73,9 @@ module.exports = class RequestPost extends Request {
 		opts.method = 'POST';
 		opts.headers['Content-Type'] = this._contentType;
 		switch(this._bodyType) {
+			case 'multipartBody':
+				opts.body = this._bodyData;
+				break;
 			case 'form':
 				opts.body = qs.stringify(this._bodyData);
 				break;
