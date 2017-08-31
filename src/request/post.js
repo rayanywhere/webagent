@@ -47,7 +47,7 @@ module.exports = class RequestPost extends Request {
 		}, body)) {
 			throw new Error('bad body, reason:' + ajv.errorsText());
 		}
-		this._bodyType = 'multipartForm';
+		this._bodyType = 'multipartBody';
 		this._bodyData = body;
 		this._contentType = 'multipart/form-data';
 		return this;
@@ -74,7 +74,7 @@ module.exports = class RequestPost extends Request {
 		opts.headers['Content-Type'] = this._contentType;
 		switch(this._bodyType) {
 			case 'multipartBody':
-				opts.body = this._bodyData;
+				opts.formData = this._bodyData;
 				break;
 			case 'form':
 				opts.body = qs.stringify(this._bodyData);
@@ -92,3 +92,4 @@ module.exports = class RequestPost extends Request {
 		return opts;
 	}
 }
+
