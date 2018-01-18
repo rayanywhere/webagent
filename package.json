@@ -1,6 +1,6 @@
 {
   "name": "webagent",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "",
   "main": "index.js",
   "directories": {
@@ -24,6 +24,7 @@
   "homepage": "https://github.com/rayanywhere/webagent#readme",
   "dependencies": {
     "query-string": "^4.3.4",
-    "request": "^2.81.0"
+    "request": "^2.81.0",
+    "socks5-http-client": "^1.0.2"
   }
 }

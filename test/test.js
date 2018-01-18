@@ -24,3 +24,13 @@ describe('#post', function() {
 		await crawler2.go(request);
 	})
 });
+
+describe('#get-with-proxy', function() {
+	it('should return status = 200', async function() {
+		let request = new Crawler.Request.Get('http://www.google.com');
+		request.setProxy({host: '127.0.0.1', port: 1086});
+		let crawler = new Crawler();
+		let response = await crawler.go(request);
+		assert(response.status === 200);
+	})
+});
